@@ -1,5 +1,4 @@
 import copy
-
 def move(dir):
     global arr, n
     if dir == 0:
