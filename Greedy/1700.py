@@ -1,26 +1,26 @@
 n, k = map(int, input().split())
-s = list(map(int, input().split()))
-m = [0 for i in range(n)]
-cnt = 0
+arr = list(map(int, input().split()))
+plugin = []
+answer = 0
 for i in range(k):
-    isTrue = False
+    if arr[i] in plugin:
+        continue
+    if len(plugin) < n:
+        plugin.append(arr[i])
+        continue
+    out = 0
+    outidx = 0
+    answer += 1
     for j in range(n):
-        if m[j] == s[i] or m[j] == 0:
-            isTrue = True
-            m[j] = s[i]
+        try:
+            idx = arr[i+1:].index(plugin[j])
+            if idx > outidx:
+                out = j
+                outidx = idx
+        except:
+            out = j
             break
-    if isTrue: continue
-    else:
-        a = 0
-        for j in range(n):
-            try:
-                if a < s[i+1:].index(m[j]):
-                    a = s[i+1:].index(m[j])
-                    b = j
-            except:
-                a = -1
-                b = j
-                break
-        m[b] = s[i]
-        cnt += 1
-print(cnt)
+    plugin[out] = arr[i]
+print(answer)
+
+
