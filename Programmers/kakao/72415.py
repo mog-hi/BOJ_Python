@@ -69,5 +69,5 @@ def solution(input_board, sr, sc):
             cnt += 2 # enter
         answer = min(answer, cnt)
     return answer
-solution([[1,0,0,3],[2,0,0,0],[0,0,0,2],[3,0,1,0]], 1, 0)
+# solution([[1,0,0,3],[2,0,0,0],[0,0,0,2],[3,0,1,0]], 1, 0)
 # solution([[3,0,0,2],[0,0,1,0],[0,1,0,0],[2,0,0,3]], 0, 1)
