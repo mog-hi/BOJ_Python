@@ -3,11 +3,10 @@ def calculate(x, y, d1, d2):
     temp = [[0]*n for _ in range(n)]
     for i in range(d1+1):
         temp[x+i][y-i] = 5
-        temp[x+d2+i][y+d2-i]=5
+        temp[x+d2+i][y+d2-i] = 5
     for j in range(d2+1):
         temp[x+j][y+j] = 5
         temp[x+d1+j][y-d1+j] = 5
-
     for i in range(x+d1):
         c = 0
         while temp[i][c] == 0 and c<=y:
