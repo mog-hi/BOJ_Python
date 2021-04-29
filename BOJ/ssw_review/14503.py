@@ -1,28 +1,25 @@
 n, m = map(int, input().split())
-x, y, d = map(int, input().split())
 board = []
+r, c, d = map(int,input().split())
 for i in range(n):
     board.append(list(map(int, input().split())))
-move = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-visited = [[0]*m for _ in range(n)]
+move = [(-1,0),(0,1),(1,0),(0,-1)]
 answer = 0
-def clear(x, y, d):
-    global answer
-    if not visited[x][y]:
-        answer+=1
-        visited[x][y] = 1
-    left = d
+while True:
+    if board[r][c] == 0:
+        answer += 1
+    board[r][c] = 2
+    nd = d
     for i in range(4):
-        left = (left+3)%4
-        cx = x+move[left][0]
-        cy = y+move[left][1]
-        if 0<=cx<n and 0<=cy<m and board[cx][cy]==0 and visited[cx][cy]==0:
-            clear(cx, cy, left)
-            return
-    cx = x-move[d][0]
-    cy = y-move[d][1]
-    if 0<=cx<n and 0<=cy<m and board[cx][cy]== 0:
-        clear(cx, cy, d)
-    return
-clear(x, y, d)
+        nd = (nd + 3) % 4
+        nr, nc = r+move[nd][0], c+move[nd][1]
+        if 0<=nr<n and 0<=nc<m and board[nr][nc] == 0:
+            r, c, d = nr, nc, nd
+            break
+    else:
+        nr = r-move[d][0]
+        nc = c-move[d][1]
+        if not (0 <= nr < n and 0 <= nc < m) or board[nr][nc] == 1:
+            break
+        r, c = nr, nc
 print(answer)
