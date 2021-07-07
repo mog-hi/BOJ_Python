@@ -9,6 +9,7 @@ def piller_check(x, y, bo, piller):
     if bo[x][y] or (x > 0 and bo[x - 1][y]) or y == 0 or piller[x][y - 1]:
         return True
     return False
+
 def delete_check(bo, piller):
     n = len(bo)
     for x in range(n):
