@@ -1,35 +1,21 @@
-from collections import deque
 def solution(n, costs):
-    graph = [[-1]*n for _ in range(n)]
-
-    def bfs():
-        visited = [0]*n
-        queue = deque()
-        queue.append(0)
-        while queue:
-            temp = queue.popleft()
-            if visited[temp]: continue
-            visited[temp] = 1
-            for i in range(n):
-                if graph[temp][i] != -1:
-                    queue.append(i)
-        for i in visited:
-            if i == 0: return False
-        return True
-
-    answer = 0
-    for i, j, cost in costs:
-        graph[i][j] = cost
-        graph[j][i] = cost
-        answer += cost
-    costs.sort(key=lambda x: -x[2])
-
-    for i, j, cost in costs:
-        graph[i][j] = -1
-        graph[j][i] = -1
-        if not bfs():
-            graph[i][j] = cost
-            graph[j][i] = cost
-        else:
-            answer -= cost
+    costs.sort(key=lambda x: x[2])
+    visited = set()
+    visited.add(costs[0][0])
+    visited.add(costs[0][1])
+    answer = costs[0][2]
+    costs.pop(0)
+    while len(visited) != n:
+        for idx, item in enumerate(costs):
+            i, j, cost = item
+            if len(visited) == n: break
+            if i in visited and j in visited:
+                continue
+            if i in visited or j in visited:
+                visited.add(i)
+                visited.add(j)
+                answer += cost
+                costs.pop(idx)
+                break
     return answer
+solution(4,[[0,1,1],[0,2,2],[1,2,5],[1,3,1],[2,3,8]])
